@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static',filename='normalize.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='skeleton.css')}}">
+    <title>Books & Authors</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                Books and Authors
+            </h1>
+            <a href="/authors">Authors</a>
+        </header>
+        <section>
+            <form action="/book" method=POST>
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" name="title">
+                </div>
+                <div>
+                    <label for="author">Description</label>
+                    <input type="text" name="description">
+                </div>
+                <input type="submit">
+            </form>
+        </section>
+        <section>
+            <h3>Books</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <td>{{book.id}}</td>
+                        <td>{{book.title}}</td>
+                        <td><a href="/books/{{book.id}}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+</body>
+</html>

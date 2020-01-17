@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static',filename='normalize.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='skeleton.css')}}">
+    <title>Books & Authors</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Books & Authors</h1>
+        </header>
+        <main>
+            <h3>{{book.title}}</h3>
+            <span>ID: {{book.id}}</span>
+            <span>Description:</span>
+            <p>
+                {{book.description}}
+            </p>
+            <span>Authors</span>
+            <ul>
+                {% for author in authors %}
+                <li>{{author.first_name}} {{author.last_name}}</li>
+                {% endfor %}
+            </ul>
+            <form action="/authors_books" method="POST">
+                <input type="hidden" name="book_id" value="{{book.id}}">
+                <select name="author_id">
+                    {% for author in authors %}
+                        <option value="{{author.id}}">
+                        {{author.first_name}} {{author.last_name}}
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="add">
+            </form>
+        </main>
+
+    </div>
+</body>
+</html>

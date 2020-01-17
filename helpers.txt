@@ -1,0 +1,16 @@
+sudo vim /etc/systemd/system/flask-wallover.service
+
+[Unit]
+Description=Gunicorn instance to serve flask-wallover
+After=network.target
+[Service]
+User=jose
+Group=www-data
+WorkingDirectory=/home/jose/flask-wallover
+Environment="PATH=/home/jose/flask-wallover/venv/bin"
+ExecStart=/home/jose/flask-wallover/venv/bin/gunicorn --workers 3 --bind unix:{{project}}.sock -m 007 wsgi:application
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl start flask-wallover
+sudo systemctl enable flask-wallover
